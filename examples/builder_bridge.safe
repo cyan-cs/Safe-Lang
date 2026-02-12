@@ -1,0 +1,22 @@
+raw fn raw_builder_seed(raw_builder_ptr: RawPtr) {
+    unsafe {
+        raw_write(raw_builder_ptr, 0, 65)
+        raw_write(raw_builder_ptr, 1, 66)
+        raw_write(raw_builder_ptr, 2, 67)
+    }
+}
+
+safe fn build_message(high_builder_len: usize) -> HighPtr {
+    unsafe {
+        let raw_builder_buf = raw_alloc(high_builder_len)
+        raw_builder_seed(raw_builder_buf)
+        let validated_builder_buf = validate_raw(raw_builder_buf)
+        let high_builder_buf = into_high(validated_builder_buf)
+        high_builder_buf
+    }
+}
+
+safe fn builder_bridge_demo() {
+    let high_bridge_len: usize = 3
+    let high_bridge_ptr = build_message(high_bridge_len)
+}

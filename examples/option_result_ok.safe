@@ -1,0 +1,9 @@
+safe fn option_result_ok_demo() {
+    let high_opt: Option<u8> = option_some_u8(42)
+    let high_has_value = option_is_some_u8(high_opt)
+    let high_unwrapped = option_unwrap_u8(option_some_u8(42))
+
+    let high_res: Result<u8, i32> = result_ok_u8_i32(high_unwrapped)
+    let high_is_ok = result_is_ok_u8_i32(high_res)
+    let high_value = result_unwrap_u8_i32(result_ok_u8_i32(7))
+}

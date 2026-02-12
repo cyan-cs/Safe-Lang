@@ -1,0 +1,27 @@
+raw fn raw_copy(raw_copy_dst: RawPtr, raw_copy_src: RawPtr, high_copy_len: usize) {
+    unsafe {
+        let raw_copy_b0 = raw_read(raw_copy_src, 0)
+        raw_write(raw_copy_dst, 0, raw_copy_b0)
+        let raw_copy_b1 = raw_read(raw_copy_src, 1)
+        raw_write(raw_copy_dst, 1, raw_copy_b1)
+        let raw_copy_b2 = raw_read(raw_copy_src, 2)
+        raw_write(raw_copy_dst, 2, raw_copy_b2)
+        let raw_copy_b3 = raw_read(raw_copy_src, 3)
+        raw_write(raw_copy_dst, 3, raw_copy_b3)
+    }
+}
+
+safe fn mem_copy_demo() {
+    let high_copy_demo_len: usize = 4
+    unsafe {
+        let raw_copy_demo_src = raw_alloc(high_copy_demo_len)
+        raw_write(raw_copy_demo_src, 0, 1)
+        raw_write(raw_copy_demo_src, 1, 2)
+        raw_write(raw_copy_demo_src, 2, 3)
+        raw_write(raw_copy_demo_src, 3, 4)
+        let raw_copy_demo_dst = raw_alloc(high_copy_demo_len)
+        raw_copy(raw_copy_demo_dst, raw_copy_demo_src, high_copy_demo_len)
+        let validated_copy_demo_dst = validate_raw(raw_copy_demo_dst)
+        let high_copy_demo_dst = into_high(validated_copy_demo_dst)
+    }
+}

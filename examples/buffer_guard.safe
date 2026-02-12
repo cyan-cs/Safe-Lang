@@ -1,0 +1,17 @@
+raw fn raw_wrap_packet(raw_wrap_src: RawPtr, high_wrap_len: usize) -> HighPtr {
+    unsafe {
+        let validated_wrap_src = validate_raw(raw_wrap_src)
+        let high_wrap_src = into_high(validated_wrap_src)
+        high_wrap_src
+    }
+}
+
+safe fn buffer_guard_demo() {
+    let high_guard_len: usize = 2
+    unsafe {
+        let raw_guard_src = raw_alloc(high_guard_len)
+        raw_write(raw_guard_src, 0, 16)
+        raw_write(raw_guard_src, 1, 32)
+        raw_wrap_packet(raw_guard_src, high_guard_len)
+    }
+}

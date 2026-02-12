@@ -1,0 +1,14 @@
+safe fn demo() {
+    let high_size: usize = 8
+    let high_buf = allocate_buffer(high_size)
+
+    unsafe {
+        let raw_ptr = raw_alloc(high_size)
+        raw_write(raw_ptr, 0, 65)
+        raw_write(raw_ptr, 1, 66)
+        let validated_ptr = validate_raw(raw_ptr)
+        let high_from_raw = into_high(validated_ptr)
+    }
+
+    deallocate_buffer(high_buf)
+}

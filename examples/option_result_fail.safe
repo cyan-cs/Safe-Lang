@@ -1,0 +1,9 @@
+safe fn option_result_fail_demo() {
+    let high_missing: Option<u8> = option_none_u8()
+    let high_has_missing = option_is_some_u8(high_missing)
+    let high_force_fail = option_unwrap_u8(option_none_u8())
+
+    let high_err: Result<u8, i32> = result_err_u8_i32(-1)
+    let high_is_ok = result_is_ok_u8_i32(high_err)
+    let high_force_result_fail = result_unwrap_u8_i32(result_err_u8_i32(-1))
+}

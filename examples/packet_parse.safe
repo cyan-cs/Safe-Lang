@@ -1,0 +1,17 @@
+safe fn packet_parse_demo() {
+    let high_packet_len: usize = 3
+
+    unsafe {
+        let raw_packet_ptr = raw_alloc(high_packet_len)
+        raw_write(raw_packet_ptr, 0, 1)
+        raw_write(raw_packet_ptr, 1, 7)
+        raw_write(raw_packet_ptr, 2, 9)
+
+        let raw_packet_type = raw_read(raw_packet_ptr, 0)
+        let raw_packet_a = raw_read(raw_packet_ptr, 1)
+        let raw_packet_b = raw_read(raw_packet_ptr, 2)
+
+        let validated_packet_ptr = validate_raw(raw_packet_ptr)
+        let high_packet_ptr = into_high(validated_packet_ptr)
+    }
+}
